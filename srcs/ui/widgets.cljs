@@ -972,3 +972,7 @@
 
 (defn pp [data]
   [:pre (with-out-str (pp/pprint data))])
+
+(defn rand-icon []
+  (icon (rand-nth fa-icons)))
+

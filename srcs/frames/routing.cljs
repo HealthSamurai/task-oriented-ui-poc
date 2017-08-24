@@ -6,6 +6,7 @@
             [clojure.set :as set]
             [route-map.core :as route-map]))
 
+
 (defn dispatch-routes [_]
   (let [fragment (.. js/window -location -hash)]
     (rf/dispatch [:fragment-changed fragment])))

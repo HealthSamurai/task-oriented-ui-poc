@@ -6,6 +6,7 @@
              "tasks" {:. :dashboard/tasks
                       [:type] {:. :dashboard/task}}
              "profile" {:. :dashboard/profile}
+             "patients" {:. :dashboard/patients}
              "navigation" {:. :dashboard/navigation}})
 
 (defn href
