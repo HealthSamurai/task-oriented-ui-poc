@@ -36,7 +36,7 @@
     {:margin-top "20px" :margin-bottom "20px"
      :border-left "2px solid #8bc34a"
      :padding-left "30px"}
-    [:&.form {:border-left-color "#aaa" :background-color "#f1f1f1"}]
+    [:&.form {:border-left-color "#ddd" :background-color "#f6f6f6"}]
     [:.search-icon {:position "relative" :right "-20px" :z-index 1000 :color "gray"}]
     [:.search {:border-top "none"
                :border-right "none"
@@ -72,6 +72,12 @@
                   :margin "0 5px 0 2px"
                   :border-radius "50%"}]
     ]
+   [:.action {:border "1px solid rgba(27, 149, 224, 0.11)"
+              :color "#1b95e0!important"
+              :padding "2px 10px"
+              :font-size "14px"
+              :font-weight 300
+              :border-radius "10px" :margin-right "10px"}]
    ])
 
 (defn layout [content]

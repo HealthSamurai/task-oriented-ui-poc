@@ -469,6 +469,7 @@
   [:div
    (styles/style nav-style)
    [:div.navigator {:style {:width "240px"}}
+
     [:a.item.switch {:href (href :navigation) } "Pt: " (user "AiBolit" true) [wgt/icon :chevron-down]]
     [:a.item {:href (href "claims")} [wgt/rand-icon] "Facesheet"]
     [:a.item {:href (href "claims")} [wgt/rand-icon] "Allergies"]
@@ -510,7 +511,7 @@
                                 :border "1px solid #ddd"
                                 :display "inline-block"
                                 :border-radius "50%"}]
-                  {:border-left "4px solid #4CAF50" :padding-left "20px" :margin-top "30px"}
+                  {:border-left-color "#4CAF50"}
                   [:h3 {:border-bottom "1px solid rgba(0,0,0,.15)!important"
                         :font-size "20px"
                         :line-height "40px"}]
@@ -518,118 +519,65 @@
                    [:.fa {:width "24px"}]]])
    [:div.row
     [:div.col-6
-     [:div.visits
+     [:div.block.visits
       [:h3 "People  " [wgt/icon :search] [:input.search {:type "search" :placeholder "search..."}]]
+      [:br]
       [:table.table
        [:tbody
         [:tr
-         [:td (user "Luis Borhes") " " [wgt/icon :male]]
-         [:td " Physician"]]
+         [:td [:a.assignee [wgt/icon :users] "Billers"]] [:td "Billers"]
+         [:td [:a.action "Chat"] [:a.action "Task"] [:a.action "Call"]]]
         [:tr
-         [:td (user "Joao Jilberto") " " [wgt/icon :male]]
-         [:td " Nurse"]]
+         [:td [:a.assignee  [wgt/icon :users] "Physician"]] [:td "Physician"]
+         [:td [:a.action "Chat"] [:a.action "Task"] [:a.action "Call"]]]
         [:tr
-         [:td (user "Augustiniana Johanson") " " [wgt/icon :female]]
-         [:td " Biller"]]
+         [:td (user "Luis Borhes")] [:td " Physician"]
+         [:td [:a.action "Chat"] [:a.action "Task"] [:a.action "Call"]]
+         ]
         [:tr
-         [:td (user "Luis Borhes") " " [wgt/icon :male]]
-         [:td " Physician"]]]]]]
+         [:td (user "Joao Jilberto")] [:td " Nurse"]
+         [:td [:a.action "Chat"] [:a.action "Task"] [:a.action "Call"]]]
+        [:tr
+         [:td (user "Joao Jilberto")] [:td " Nurse"]]
+        [:tr
+         [:td (user "Joao Jilberto")] [:td " Nurse"]]
+        [:tr
+         [:td (user "Joao Jilberto")] [:td " Nurse"]]
+        [:tr
+         [:td (user "Augustiniana Johanson")] [:td " Biller"]]
+        [:tr
+         [:td (user "Luis Borhes")] [:td " Physician"]]]]]]
     [:div.col-6
-     [:div.visits
-      (styles/style [:.visits
-                     [:.mute {:color "#888"}]
-                     [:h3 [:.fa {:font-size "18px"
-                                 :z-index "100"
-                                 :position "relative" :left "20px" :margin-left "20px" :color "gray"}]]
-                     [:.search {:border-top "none"
-                                :border-right "none"
-                                :padding-left "24px"
-                                :position "relative"
-                                :bottom "-1px"
-                                :width "20em"
-                                :border-bottom "1px solid #888"
-                                :border-left "none"}
-                      [:&:focus
-                       {:border-top "none"
-                        :border-right "none"
-                        :border-bottom "1px solid blue"
-                        :border-left "none"}]]
-                     [:img.avatar {:width "18px"
-                                   :height "18px"
-                                   :margin "0 5px"
-                                   :border "1px solid #ddd"
-                                   :display "inline-block"
-                                   :border-radius "50%"}]
-                     {:border-left "4px solid #4CAF50" :padding-left "20px" :margin-top "30px"}
-                     [:h3 {:border-bottom "1px solid rgba(0,0,0,.15)!important"
-                           :font-size "20px"
-                           :line-height "40px"}]
-                     [:.item {:display "block" :padding "5px 0" }
-                      [:.fa {:width "24px"}]]])
-      [:h3 "Teams  " [wgt/icon :search]
-       [:input.search {:type "search" :placeholder "search..."}]]
+     [:div.visits.block
+      [:h3 "Patients  " [wgt/icon :search] [:input.search {:type "search" :placeholder "search..."}]]
+      [:br]
       [:table.table
        [:tbody
         [:tr
-         [:td [:a {:href (href :teams :physicians)} "Billers"]]
-         [:td " Neurotoxins"]]
+         [:td (user "Luis Borhes")]]
         [:tr
-         [:td [:a {:href (href :teams :physicians)} "Physician"]]
-         [:td "Neurotoxin injectable for skin rejuvenation"]]
+         [:td (user "Joao Jilberto")]]
         [:tr
-         [:td [:a {:href (href :teams :physicians)} "Nurses"]]
-         [:td "Neurotoxin injectable for skin rejuvenation"]]]]]]
+         [:td (user "Augustiniana Johanson")]]
+        [:tr
+         [:td (user "Luis Borhes")]]
+        [:tr
+         [:td (user "Joao Jilberto")]]
+        [:tr
+         [:td (user "Joao Jilberto")]]
+        [:tr
+         [:td (user "Augustiniana Johanson")]]
+        [:tr
+         [:td (user "Luis Borhes")]]
+        [:tr
+         [:td (user "Joao Jilberto")]]
+        [:tr
+         [:td (user "Augustiniana Johanson")]]]]]
+     ]
     ]
    
 
-   
-   [:div.visits
-    (styles/style [:.visits
-                   [:.mute {:color "#888"}]
-                   [:h3 [:.fa {:font-size "18px"
-                               :z-index "100"
-                               :position "relative" :left "20px" :margin-left "20px" :color "gray"}]]
-                   [:.search {:border-top "none"
-                              :border-right "none"
-                              :padding-left "24px"
-                              :position "relative"
-                              :bottom "-1px"
-                              :width "20em"
-                              :border-bottom "1px solid #888"
-                              :border-left "none"}
-                    [:&:focus
-                     {:border-top "none"
-                      :border-right "none"
-                      :border-bottom "1px solid blue"
-                      :border-left "none"}]
-                    ]
-                   [:img.avatar {:width "18px"
-                                 :height "18px"
-                                 :margin "0 5px"
-                                 :border "1px solid #ddd"
-                                 :display "inline-block"
-                                 :border-radius "50%"}]
-                   {:border-left "4px solid #4CAF50" :padding-left "20px" :margin-top "30px"}
-                   [:h3 {:border-bottom "1px solid rgba(0,0,0,.15)!important"
-                         :font-size "20px"
-                         :line-height "40px"}]
-                   [:.item {:display "block" :padding "5px 0" }
-                    [:.fa {:width "24px"}]]])
-    [:h3 "Patients  " [wgt/icon :search] [:input.search {:type "search" :placeholder "search..."}]]
-    [:table.table
-     [:tbody
-      [:tr
-       [:td (user "Luis Borhes") " " [wgt/icon :male]]]
-      [:tr
-       [:td (user "Joao Jilberto") " " [wgt/icon :male]]]
-      [:tr
-       [:td (user "Augustiniana Johanson") " " [wgt/icon :female]]]
-      [:tr
-       [:td (user "Luis Borhes") " " [wgt/icon :male]]]
-      [:tr
-       [:td (user "Joao Jilberto") " " [wgt/icon :male]]]
-      [:tr
-       [:td (user "Augustiniana Johanson") " " [wgt/icon :female]]]]]]])
+   ])
 
 (pages/reg-page :dashboard/index index)
 (pages/reg-page :dashboard/tasks tasks)
