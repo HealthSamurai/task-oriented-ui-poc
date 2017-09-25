@@ -5,6 +5,7 @@
 (def routes {:. :dashboard/index
              "tasks" {:. :dashboard/tasks
                       [:type] {:. :dashboard/task}}
+             "notes" {:. :dashboard/notes}
              "profile" {:. :dashboard/profile}
              "patients" {:. :dashboard/patients}
              "navigation" {:. :dashboard/navigation}})

@@ -32,26 +32,28 @@
                    :border-color "#0275d8"}
     [:&:hover {:background-color "#0275d8"
                :color "white"}]]
+
+   [:.search-icon {:position "relative" :right "-20px" :z-index 1000 :color "#ddd"}]
+   [:.search {:border-top "none"
+              :font-weight 300
+              :border-right "none"
+              :padding-left "24px"
+              :position "relative"
+              :bottom "-1px"
+              :width "20em"
+              :border-bottom "1px solid #888"
+              :border-left "none"}
+    [:&:focus
+     {:border-top "none!important"
+      :border-right "none!important"
+      :border-bottom "1px solid blue!important"
+      :border-left "none!important"}]
+    ]
    [:.block
     {:margin-top "20px" :margin-bottom "20px"
      :border-left "2px solid #8bc34a"
      :padding-left "30px"}
     [:&.form {:border-left-color "#ddd" :background-color "#f6f6f6"}]
-    [:.search-icon {:position "relative" :right "-20px" :z-index 1000 :color "gray"}]
-    [:.search {:border-top "none"
-               :border-right "none"
-               :padding-left "24px"
-               :position "relative"
-               :bottom "-1px"
-               :width "20em"
-               :border-bottom "1px solid #888"
-               :border-left "none"}
-     [:&:focus
-      {:border-top "none"
-       :border-right "none"
-       :border-bottom "1px solid blue"
-       :border-left "none"}]
-     ]
 
     [:b {:color "gray"
          :font-weight 300
@@ -80,13 +82,17 @@
               :border-radius "10px" :margin-right "10px"}]
    ])
 
+(defn avatar []
+  [:img.avatar
+   {:src (str "https://randomuser.me/api/portraits/men/" (rand-int 100) ".jpg")}])
+
 (defn layout [content]
   (fn []
     [:div.wrap
      (styles/style common-style)
      (styles/style [:div.wrap
                     {:padding-left "130px"
-                     :padding-top "30px"
+                     :padding-top "10px"
                      :padding-right "60px"}
                     [:div.nav-cnt
                      {:position "fixed"
@@ -95,6 +101,18 @@
                       :background "#f6f6f6"
                       :padding "20px"
                       :bottom 0}
+                     [:.navu
+                      {:opacity 0.7}
+                      [:img.avatar {
+                                    :width "40px"
+                                    :height "40px"
+                                    :border-radius "50%"
+                                    :margin "10px 5px 5px 5px"
+                                    :border "1px solid #aaa"
+                                    }]
+                      [:&:hover {:opacity 1}]
+                      ]
+                     [:.name {:font-size "11px" :color "#888" :text-align "center"}]
                      [:.nav {:color "#3f51b5"
                              :border "1px solid #3f51b5"
                              :border-radius "50%"
@@ -105,7 +123,8 @@
                              :font-size "20px"
                              :margin "10px 5px"
                              :width "40px"
-                             :height "40px"}
+                             :height "40px"
+                             }
                       [:&.active {:color "#444" :opacity 1 :border-color "#aaa"}]
                       [:&.blue {:color "#03A9F4" :opacity 1 :border-color "#03A9F4"}]
                       [:&.pink {:color "#E91E63" :border-color "#E91E63"}]
@@ -114,6 +133,11 @@
                       [:&:hover {:opacity 1}]]]])
      [:div.nav-cnt
       [:a.nav.blue {:href (href :navigation)} [wgt/icon :bars]]
+      [:a.nav.green {:href (href :notes)} [wgt/icon :file-pdf-o]]
       [:a.nav.green {:href (href :tasks)} [wgt/icon :check-square-o]]
-      [:a.nav.active {:href (href :profile)} [wgt/icon :user-o]]]
+      [:a.nav.active {:href (href :profile)} [wgt/icon :user-o]]
+      [:a.navu {:href (href "patients")} (avatar) [:div.name "Greg"]]
+      [:a.navu {:href (href "patients")} (avatar) [:div.name "Greg"]]
+      [:a.navu {:href (href "patients")} (avatar) [:div.name "Greg"]]
+      ]
      [:div.content content]]))
