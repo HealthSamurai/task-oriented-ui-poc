@@ -7,6 +7,7 @@
    [re-frame.core :as rf]
    [ui.widgets :as wgt]
    [ui.styles :as styles]
+   [ui.editor :as editor]
    [clojure.string :as str]))
 
 (defn index [params]
@@ -234,6 +235,7 @@
       [:a.itemo "Acne template 1"]
 
       ]
+     [editor/superior-cm]
      [:textarea.text
       "This is a 21 year old female who comes in for a chief complaint of acne, located on the face. The
 acne consists of scarring and pimples, is moderate in severity and has been present for years. Pertinent
