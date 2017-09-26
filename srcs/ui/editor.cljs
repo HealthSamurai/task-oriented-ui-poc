@@ -51,11 +51,15 @@
      {:component-did-mount
       (fn [this]
         (let [editor
-              (.fromTextArea js/CodeMirror (r/dom-node this)
-                             (clj->js {:lineNumbers true
-                                       :extraKeys {"Ctrl-Space" "autocomplete"}
-                                       :hintOptions {:hint complete-fn}}))]
+              (.fromTextArea
+               js/CodeMirror (r/dom-node this)
+               (clj->js {:lineNumbers true
+                         :hintOptions {:hint complete-fn}}))]
           (.on editor "change" (fn [cm _] (on-change (.getValue cm))))
+          (.on editor "keyup"
+               (fn [cm _] (when-not (.. cm -state -completionActive)
+                            (.. js/CodeMirror -commands
+                                (autocomplete cm nil (clj->js {:completeSingle false}))))))
           (reset! cm-atom editor)))
 
       :component-will-receive-props
