@@ -1,5 +1,20 @@
 (ns ui.editor
-  (:require [reagent.core :as r]))
+  (:require [reagent.core :as r]
+            [re-frame.core :as rf]))
+
+;; FIXME: remove on re-form usage
+
+(rf/reg-event-db
+  :cm/set-val
+  (fn [db [_ path new-val]]
+    (assoc-in db [:cm path] new-val)))
+
+(rf/reg-sub
+  :cm/get-val
+  (fn [db [_ path]]
+    (get-in db [:cm path])))
+
+;; endFIXME
 
 (defn- search-backwards [line pos regex]
   (loop [p pos]
@@ -11,28 +26,45 @@
           cur-pos
           (recur cur-pos))))))
 
-(defn- complete [cm option]
+(defn- options [dict regex word]
+  (dict (clojure.string/replace word regex "")))
+
+(defn complete-startswith [regex dict cm option]
   (let [cursor (.getCursor cm)
         end-char (.-ch cursor)
         line (.getLine cm (.-line cursor))
-        start-char (search-backwards line end-char #"#")
-        to-pos #(.Pos js/CodeMirror line %)]
-    (if (nil? start-char)
-      nil
-      (clj->js
-       {:list ["some" "useful" "completions"]
-        :from {:line (.-line cursor) :ch start-char}
-        :to {:line (.-line cursor) :ch end-char}}))))
+        start-char (search-backwards line end-char regex)
+        to-pos #(.Pos js/CodeMirror line %)
+        from {:line (.-line cursor) :ch start-char}
+        to {:line (.-line cursor) :ch end-char}
+        word (.getRange cm (clj->js from) (clj->js to))]
+    (when start-char
+      (when-let [lst (options dict regex word)]
+        (clj->js
+         {:list lst
+          :from from
+          :to to})))))
 
-(defn superior-cm [] ;; TODO: add props as re-form inputs have to
-  (r/create-class
-   {:component-did-mount
-    (fn [this]
-      (.fromTextArea js/CodeMirror (r/dom-node this)
-                     (clj->js {:lineNumbers true
-                               :extraKeys {"Ctrl-Space" "autocomplete"}
-                               :hintOptions {:hint complete}})))
+(defn superior-cm [{:keys [value on-change complete-fn]}]
+  (let [cm-atom (r/atom nil)]
+    (r/create-class
+     {:component-did-mount
+      (fn [this]
+        (let [editor
+              (.fromTextArea js/CodeMirror (r/dom-node this)
+                             (clj->js {:lineNumbers true
+                                       :extraKeys {"Ctrl-Space" "autocomplete"}
+                                       :hintOptions {:hint complete-fn}}))]
+          (.on editor "change" (fn [cm _] (on-change (.getValue cm))))
+          (reset! cm-atom editor)))
 
-    :reagent-render
-    (fn []
-      [:textarea.text])}))
+      :component-will-receive-props
+      (fn [this next-props]
+        (when-let [cm @cm-atom]
+          (let [nvalue (-> next-props second :value)]
+            (when (not= (.getValue cm) nvalue)
+              (.setValue cm (or nvalue ""))))))
+
+      :reagent-render
+      (fn [{:keys [value on-change complete-fn]}]
+        [:textarea.text])})))

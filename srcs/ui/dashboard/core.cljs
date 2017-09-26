@@ -235,7 +235,13 @@
       [:a.itemo "Acne template 1"]
 
       ]
-     [editor/superior-cm]
+     [editor/superior-cm
+      {:complete-fn (partial editor/complete-startswith
+                             #"#"
+                             {"test" ["one example" "two" "fill me"]
+                                              "test2" ["another" "completion"]})
+       :value @(rf/subscribe [:cm/get-val :cm-test])
+       :on-change #(rf/dispatch [:cm/set-val :cm-test %])}]
      [:textarea.text
       "This is a 21 year old female who comes in for a chief complaint of acne, located on the face. The
 acne consists of scarring and pimples, is moderate in severity and has been present for years. Pertinent
