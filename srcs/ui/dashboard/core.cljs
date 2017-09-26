@@ -153,12 +153,6 @@ Isotretinoin. She is not currently on any treatment.
      (styles/style
       [:div.center
        {:width "700px" :margin "0 auto"}
-       #_[:.CodeMirror {:border "1px" "solid" "#eee"
-                      :height "auto"
-                      :font-weight 400
-                      :font-size "18px"
-                      :font-family
-                      "medium-content-serif-font,Georgia,Cambria,\"Times New Roman\",Times,serif"}]
        [:h1 {:border-bottom "none!important"
              :font-size "25px"
              :color "#666"
@@ -254,7 +248,9 @@ Isotretinoin. She is not currently on any treatment.
        [editor/superior-cm
         {:complete-fn (partial editor/complete-startswith
                                #"#"
-                               {"test" ["one example" "two" "fill me"]
+                               {"test" [{:displayText "first" :text "first"}
+                                        {:displayText "nikolai"
+                                         :text "Божиею поспешествующею милостию, Мы, Николай Вторый, Император и Самодержец Всероссийский, Московский, Киевский, Владимирский, Новгородский; Царь Казанский, Царь Астраханский, Царь Польский, Царь Сибирский, Царь Херсониса Таврическаго, Царь Грузинский; Государь Псковский и Великий Князь Смоленский, Литовский, Волынский, Подольский и Финляндский; Князь Эстляндский, Лифляндский, Курляндский и Семигальский, Самогитский, Белостокский, Корельский, Тверский, Югорский, Пермский, Вятский, Болгарский и иных; Государь и Великий Князь Новагорода низовския земли, Черниговский, Рязанский, Полотский, Ростовский, Ярославский, Белозерский, Удорский, Обдорский, Кондийский, Витебский, Мстиславский и всея северныя страны Повелитель; и Государь Иверския, Карталинския и Кабардинския земли и области Арменския; Черкасских и Горских Князей и иных Наследный Государь и Обладатель; Государь Туркестанский; Наследник Норвежский, Герцог Шлезвиг-Голстинский, Стормарнский, Дитмарсенский и Ольденбургский и прочая, и прочая, и прочая"}]
                                 "test2" ["another" "completion"]})
          :value @(rf/subscribe [:cm/get-val :cm-test])
          :on-change #(rf/dispatch [:cm/set-val :cm-test %])}]]
