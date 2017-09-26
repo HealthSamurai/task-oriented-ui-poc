@@ -52,7 +52,9 @@
       (fn [this]
         (let [editor
               (.fromTextArea
-               js/CodeMirror (r/dom-node this)
+               js/CodeMirror (-> (r/dom-node this)
+                                 (.getElementsByClassName "cm-textarea")
+                                 array-seq first)
                (clj->js {:viewportMargin (.-Infinity js/window)
                          :lineWrapping true
                          :hintOptions {:hint complete-fn}}))]
@@ -72,4 +74,5 @@
 
       :reagent-render
       (fn [{:keys [value on-change complete-fn]}]
-        [:textarea.text])})))
+        [:div.cm-wrapper
+         [:textarea.cm-textarea]])})))

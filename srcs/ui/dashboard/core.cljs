@@ -189,23 +189,23 @@ Isotretinoin. She is not currently on any treatment.
                         :margin-top "20px" :border-radius "50%" :margin-right "20px" :float "left"}]
           [:.data {:margin-left "100px"}]]]
         [:.option {:font-weight 300 :color "#888" :margin-right "15px"}]
+        [:.cm-wrapper :.text {:border-left "4px solid #eee"
+                       :padding "0px 20px"}]
         [:.text :.CodeMirror
-         {:border-left "4px solid #eee"
+         {
           :width "100%"
-          :min-height "auto"
+          :height "auto"
           :font-family  "medium-content-serif-font,Georgia,Cambria,\"Times New Roman\",Times,serif"
           :letter-spacing ".01rem;"
-          :font-weight 400;
+          :font-weight 400
           :font-style "normal;"
           :color "rgba(0,0,0,.8)"
           :font-size "18px;"
-          :line-height 1.58;
-          :padding "0px 20px"}
+          :line-height 1.58}
          [:&:focus
           {:box-shadow "none!important"
            :outline "none"
-           :border-left-color "#26b4f4"}]]
-        [:.CodeMirror {:height "auto"}]])
+           :border-left-color "#26b4f4"}]]])
       [patient-bgt (atom false)]
       #_[:div.pt
          [:div.info
