@@ -64,7 +64,7 @@
              :line-height "20px"}]
         ]]]
      [:.option {:font-weight 300 :color "#888" :margin-right "15px"}]])
-   
+
    [:div.pt
     [:div.info
      (avatar)
@@ -131,7 +131,7 @@
             [:a.item {:href (href "claims")} [wgt/rand-icon] "Past Medical History"]]]])])
 
 (defn user [name & [not-link?]]
-  (if not-link? 
+  (if not-link?
     [:span.assignee
      (avatar)
      name]
@@ -141,167 +141,162 @@
      name]))
 
 (defn notes [params]
-  [:div.ws
-   (styles/style
-    [:div.center
-     {:width "700px" :margin "0 auto"}
-     [:h1 {:border-bottom "none!important"
-           :font-size "25px"
-           :color "#666"
-           :margin-top "20px"
-           :margin-bottom "-10px"
-           :font-weight "bold"}]
-     [:.option {:font-weight 300 :color "#888" :margin-right "15px"}]
-     [:.activities {}]
-     [:.history {:border-left-color "#ddd"}]
-     [:.time {:color "gray" :margin-right "20px"}]
-     [:.assignee {:margin-left 0 :margin-top "4px"}]
-     [:.item {:padding "5px 0"
-              ;; :border-left "2px solid #8bc34a"
-              :border-left "2px solid #ddd"
-              :padding-left "15px"
-              :margin-bottom "10px"
-              :color "#555"
-              :display "block"}
-      [:&.critical {:border-color "pink"}]
-      [:&:hover {:background "#f6f6f6"}]
-      [:b {:font-weight "300" :color "gray"}]
-      [:.fa {:color "gray"  :margin-right "10px"}]
-      [:.title {:margin "0px"}]]])
-   [:div.center
-    (styles/style
-     [:div
-      [:b {:font-weight 300 :margin "20px 0 10px 0" :display "block" :font-size "14px" :color "gray" :border-bottom "1px solid #ddd"}]
-      [:.nowrap {:white-space "nowrap"}]
-      [:.desc {:color "#888"}]
-      [:.pt
-       [:.info
-        [:img.avatar {:width "80px" :height "80px"
-                      :border "1px solid #ddd"
-                      :margin-top "20px" :border-radius "50%" :margin-right "20px" :float "left"}]
-        [:.data {:margin-left "100px"}]]]
-      [:.option {:font-weight 300 :color "#888" :margin-right "15px"}]
-      [:.text {:width "100%" :border "none"
-               :min-height "auto"
-               :font-family  "medium-content-serif-font,Georgia,Cambria,\"Times New Roman\",Times,serif"
-               :letter-spacing ".01rem;"
-               :font-weight 400;
-               :font-style "normal;"
-               :color "rgba(0,0,0,.8)"
-               :font-size "18px;"
-               :line-height 1.58;
-               :padding "0px 20px"}]
-      [:.text {:border-left "4px solid #eee"}
-       [:&:focus
-        {:box-shadow "none!important"
-         :outline "none"
-         :border-left-color "#26b4f4"}]]])
-    [patient-bgt (atom false)]
-    #_[:div.pt
-     [:div.info
-      (avatar)
-      [:div.data
-       [:br]
-       [:h3
-        "Anna Khan " [:span.small "Female 21y"]
-        " "
-        [:span.action [wgt/icon :thumb-tack]]]
-       [:p "Some information"]]]]
-    [:section
-     [:h1 "CC: " "Acne"]]
-
-    [:section
-     [:h1 "Summary"]
-     (styles/style [:section {:position "relative"}
-                    [:.actions {:position "absolute"
-                                :right "-350px"
-                                :top "-0px"
-                                :width "300px"
-                                :border "1px solid #ddd"
-                                :border-radius "4px"
-                                :padding "20px 15px"
-                                :box-shadow "1px 1px 2px #ddd"
-                                }
-                     [:a.itemo {:display "block" :padding "5px 0"
-                                :cursor "pointer"
-                                :color "#1b95e0!important"}]
-                     ]])
-     [:div.actions
-      [:h3 "Summary templates"]
-      [:a.itemo "Acne template 1"]
-      [:a.itemo "Acne template 1"]
-      [:a.itemo "Acne template 1"]
-      [:a.itemo "Acne template 1"]
-      [:a.itemo "Acne template 1"]
-
-      ]
-     [editor/superior-cm
-      {:complete-fn (partial editor/complete-startswith
-                             #"#"
-                             {"test" ["one example" "two" "fill me"]
-                                              "test2" ["another" "completion"]})
-       :value @(rf/subscribe [:cm/get-val :cm-test])
-       :on-change #(rf/dispatch [:cm/set-val :cm-test %])}]
-     [:textarea.text
-      "This is a 21 year old female who comes in for a chief complaint of acne, located on the face. The
+  (rf/dispatch [:cm/set-val :cm-test "This is a 21 year old female who comes in for a chief complaint of acne, located on the face. The
 acne consists of scarring and pimples, is moderate in severity and has been present for years. Pertinent
 history includes: history of accutane use, an oily face, wearing make up, and normal menses. Pertinent
 negatives include: acne does not worsen around menstrual cycle, no oral contraceptive use, does not pick
 at acne, no history of radiation treatment in the past for acne, and does not have a dry face. She has tried:
 Isotretinoin. She is not currently on any treatment.
-"]]
+"])
+  (fn [params]
+    [:div.ws
+     (styles/style
+      [:div.center
+       {:width "700px" :margin "0 auto"}
+       #_[:.CodeMirror {:border "1px" "solid" "#eee"
+                      :height "auto"
+                      :font-weight 400
+                      :font-size "18px"
+                      :font-family
+                      "medium-content-serif-font,Georgia,Cambria,\"Times New Roman\",Times,serif"}]
+       [:h1 {:border-bottom "none!important"
+             :font-size "25px"
+             :color "#666"
+             :margin-top "20px"
+             :margin-bottom "-10px"
+             :font-weight "bold"}]
+       [:.option {:font-weight 300 :color "#888" :margin-right "15px"}]
+       [:.activities {}]
+       [:.history {:border-left-color "#ddd"}]
+       [:.time {:color "gray" :margin-right "20px"}]
+       [:.assignee {:margin-left 0 :margin-top "4px"}]
+       [:.item {:padding "5px 0"
+                ;; :border-left "2px solid #8bc34a"
+                :border-left "2px solid #ddd"
+                :padding-left "15px"
+                :margin-bottom "10px"
+                :color "#555"
+                :display "block"}
+        [:&.critical {:border-color "pink"}]
+        [:&:hover {:background "#f6f6f6"}]
+        [:b {:font-weight "300" :color "gray"}]
+        [:.fa {:color "gray"  :margin-right "10px"}]
+        [:.title {:margin "0px"}]]])
+     [:div.center
+      (styles/style
+       [:div
+        [:b {:font-weight 300 :margin "20px 0 10px 0" :display "block" :font-size "14px" :color "gray" :border-bottom "1px solid #ddd"}]
+        [:.nowrap {:white-space "nowrap"}]
+        [:.desc {:color "#888"}]
+        [:.pt
+         [:.info
+          [:img.avatar {:width "80px" :height "80px"
+                        :border "1px solid #ddd"
+                        :margin-top "20px" :border-radius "50%" :margin-right "20px" :float "left"}]
+          [:.data {:margin-left "100px"}]]]
+        [:.option {:font-weight 300 :color "#888" :margin-right "15px"}]
+        [:.text :.CodeMirror
+         {:border-left "4px solid #eee"
+          :width "100%"
+          :min-height "auto"
+          :font-family  "medium-content-serif-font,Georgia,Cambria,\"Times New Roman\",Times,serif"
+          :letter-spacing ".01rem;"
+          :font-weight 400;
+          :font-style "normal;"
+          :color "rgba(0,0,0,.8)"
+          :font-size "18px;"
+          :line-height 1.58;
+          :padding "0px 20px"}
+         [:&:focus
+          {:box-shadow "none!important"
+           :outline "none"
+           :border-left-color "#26b4f4"}]]
+        [:.CodeMirror {:height "auto"}]])
+      [patient-bgt (atom false)]
+      #_[:div.pt
+         [:div.info
+          (avatar)
+          [:div.data
+           [:br]
+           [:h3
+            "Anna Khan " [:span.small "Female 21y"]
+            " "
+            [:span.action [wgt/icon :thumb-tack]]]
+           [:p "Some information"]]]]
+      [:section
+       [:h1 "CC: " "Acne"]]
 
-    [:section
-     [:h1 "HPI"]
-     [:div.text
-      "This is a 21 year old female who comes in for a chief complaint of acne, located on the face. The
-acne consists of scarring and pimples, is moderate in severity and has been present for years. Pertinent
-history includes: history of accutane use, an oily face, wearing make up, and normal menses. Pertinent
-negatives include: acne does not worsen around menstrual cycle, no oral contraceptive use, does not pick
-at acne, no history of radiation treatment in the past for acne, and does not have a dry face. She has tried:
-Isotretinoin. She is not currently on any treatment.
-Was on isotretinoin x 3 mos while living in Pakistan. Was clear for a short time but acne recurred.
-Regular menses (qmo) but acne occurs almost daily
-Pt took isotretinoin for 3 months in 2016 from Pakistan which improved her acne. However, acne is
-recurring. Pt has also tried OTC topical tx (vitamin C serum) which helped initially.
-Pt has regular menses
+      [:section
+       [:h1 "Summary"]
+       (styles/style [:section {:position "relative"}
+                      [:.actions {:position "absolute"
+                                  :right "-350px"
+                                  :top "-0px"
+                                  :width "300px"
+                                  :border "1px solid #ddd"
+                                  :border-radius "4px"
+                                  :padding "20px 15px"
+                                  :box-shadow "1px 1px 2px #ddd"
+                                  }
+                       [:a.itemo {:display "block" :padding "5px 0"
+                                  :cursor "pointer"
+                                  :color "#1b95e0!important"}]
+                       ]])
+       [:div.actions
+        [:h3 "Summary templates"]
+        [:a.itemo "Acne template 1"]
+        [:a.itemo "Acne template 1"]
+        [:a.itemo "Acne template 1"]
+        [:a.itemo "Acne template 1"]
+        [:a.itemo "Acne template 1"]
 
-"]]
+        ]
+       [editor/superior-cm
+        {:complete-fn (partial editor/complete-startswith
+                               #"#"
+                               {"test" ["one example" "two" "fill me"]
+                                "test2" ["another" "completion"]})
+         :value @(rf/subscribe [:cm/get-val :cm-test])
+         :on-change #(rf/dispatch [:cm/set-val :cm-test %])}]]
+      [:section
+       [:h1 "HPI"]
+       [:div.text
+        "This is a 21 year old female who comes in for a chief complaint of acne, located on the face. The acne consists of scarring and pimples, is moderate in severity and has been present for years. Pertinent history includes: history of accutane use, an oily face, wearing make up, and normal menses. Pertinent negatives include: acne does not worsen around menstrual cycle, no oral contraceptive use, does not pick at acne, no history of radiation treatment in the past for acne, and does not have a dry face. She has tried: Isotretinoin. She is not currently on any treatment. Was on isotretinoin x 3 mos while living in Pakistan. Was clear for a short time but acne recurred. Regular menses (qmo) but acne occurs almost daily Pt took isotretinoin for 3 months in 2016 from Pakistan which improved her acne. However, acne is recurring. Pt has also tried OTC topical tx (vitamin C serum) which helped initially. Pt has regular menses "]]
 
-    [:section.ros
-     [:h1 "ROS"]
-     (styles/style [:.ros
-                    [:h4 {:font-size "13px" :font-weight "300"}]
-                    [:.itema {:border-left "5px solid #ddd"
-                              :color "#888"
-                              :margin-bottom "5px"
-                              :padding "0 10px"}
-                     [:&.active {:border-color "green"}]
-                     ]])
-     [:div.row 
-      [:div.col-4
-       [:h4 "Integumentary"]
-       [:div.itema "problems with healing"]
-       [:div.itema.active "problems with scarring (hypertrophic or keloid)"]
-       [:div.itema "rash"]
+      [:section.ros
+       [:h1 "ROS"]
+       (styles/style [:.ros
+                      [:h4 {:font-size "13px" :font-weight "300"}]
+                      [:.itema {:border-left "5px solid #ddd"
+                                :color "#888"
+                                :margin-bottom "5px"
+                                :padding "0 10px"}
+                       [:&.active {:border-color "green"}]
+                       ]])
+       [:div.row
+        [:div.col-4
+         [:h4 "Integumentary"]
+         [:div.itema "problems with healing"]
+         [:div.itema.active "problems with scarring (hypertrophic or keloid)"]
+         [:div.itema "rash"]
+         ]
+        [:div.col-4
+         [:h4 "Allergic / Immunologic"]
+         [:div.itema "immunosuppression	Allergic / Immunologic"]
+         [:div.itema.active "hay fever"]
+         [:div.itema "problems with healing"]]
+        [:div.col-4
+         [:h4 "Integumentary"]
+         [:div.itema "problems with healing"]
+         [:div.itema "problems with scarring (hypertrophic or keloid)"]
+         [:div.itema "rash"]]]
+
        ]
-      [:div.col-4
-       [:h4 "Allergic / Immunologic"]
-       [:div.itema "immunosuppression	Allergic / Immunologic"]
-       [:div.itema.active "hay fever"]
-       [:div.itema "problems with healing"]]
-      [:div.col-4
-       [:h4 "Integumentary"]
-       [:div.itema "problems with healing"]
-       [:div.itema "problems with scarring (hypertrophic or keloid)"]
-       [:div.itema "rash"]]]
 
-     ]
-
-    [:section
-     [:h1 "Exam"]
-     [:div.text
-      "An examination was performed including the head (including face), inspection of conjunctivae and lids,
+      [:section
+       [:h1 "Exam"]
+       [:div.text
+        "An examination was performed including the head (including face), inspection of conjunctivae and lids,
 lips but not teeth and gums, right ear, left ear, neck, chest, back, right forearm, left forearm, right hand,
 and left hand.
 Patient Skin Type is Type IV.
@@ -315,38 +310,38 @@ malar cheek.
  - inflammatory papules and pustules, comedonal papules, scars, and PIH
  - ill-defined hyperpigmented patches"]]
 
-    [:section
-     [:h1 "Impression/Plan: "
-      "Acne Vulgaris (New Dx) (L70.0)"]
-     [:div.text "Overall Assessment: 3.0 - multiple inflammatory lesions but noninflammatory lesions predominate"]]
+      [:section
+       [:h1 "Impression/Plan: "
+        "Acne Vulgaris (New Dx) (L70.0)"]
+       [:div.text "Overall Assessment: 3.0 - multiple inflammatory lesions but noninflammatory lesions predominate"]]
 
-    [:section
-     [:h1 "Notes " ]
-     [:div.text "(+) Hx of taking isotretinoin for 3 months in 2016"]]
+      [:section
+       [:h1 "Notes " ]
+       [:div.text "(+) Hx of taking isotretinoin for 3 months in 2016"]]
 
-    [:section
-     [:h1 "Prescriptions" ]
-     [:table.table
-      [:tbody
-       [:tr
-        [:td.nowrap [:strong "benzoyl peroxide 5 % "] [:br] "topical cleanser"]
-        [:td.desc "Wash face, chest, and back once daily in the shower. Leave on for 10-15 sec before rinsing. Rinse thoroughly"]]
-       [:tr
-        [:td.nowrap [:strong "tretinoin 0.05 %"] [:br] "topical cream"]
-        [:td.desc "Apply a lentil sized amount to the entire face once in the evening. Start 2x weekly and increase application to every night as tolerated"]]]]
-     [:div {:style {:background-color "#f1f1f1" :border-left "4px solid #ddd" :padding "20px" :margin "20px 0"}}
-      "Send prescription to Pharmacy: "
-      [:strong "First Pharmacy 4167 Bowne St (718) 463-0333 "]
-      [:button.btn.btn-primary "Send!"]]
+      [:section
+       [:h1 "Prescriptions" ]
+       [:table.table
+        [:tbody
+         [:tr
+          [:td.nowrap [:strong "benzoyl peroxide 5 % "] [:br] "topical cleanser"]
+          [:td.desc "Wash face, chest, and back once daily in the shower. Leave on for 10-15 sec before rinsing. Rinse thoroughly"]]
+         [:tr
+          [:td.nowrap [:strong "tretinoin 0.05 %"] [:br] "topical cream"]
+          [:td.desc "Apply a lentil sized amount to the entire face once in the evening. Start 2x weekly and increase application to every night as tolerated"]]]]
+       [:div {:style {:background-color "#f1f1f1" :border-left "4px solid #ddd" :padding "20px" :margin "20px 0"}}
+        "Send prescription to Pharmacy: "
+        [:strong "First Pharmacy 4167 Bowne St (718) 463-0333 "]
+        [:button.btn.btn-primary "Send!"]]
 
-     [:div.text
-      "Will tx with topicals for now. May consider PO medication on f/u visit if condition is inadequately controlled or worsens. Pt was
+       [:div.text
+        "Will tx with topicals for now. May consider PO medication on f/u visit if condition is inadequately controlled or worsens. Pt was
 counseled that AV may be hormonal in nature.."
-      ]
-     ]
-    [:section
-     [:h1 "Counseling" ]
-     [:div.text "
+        ]
+       ]
+      [:section
+       [:h1 "Counseling" ]
+       [:div.text "
 I counseled the patient regarding the following:
 Skin care: I discussed with the patient the importance of using cleansers, moisturizers and cosmetics that are non-comedogenic.
 Expectations: The patient is aware that acne is a chronic condition. It may take up to 2-3 months to see a 60-80% improvement of
@@ -356,38 +351,38 @@ nodules or cysts.
 Sun protection emphasized.
 Nutrition (be wary of high GI foods and dairy), exercise, stress mgmt, PO hydration,
 "]]
-    [:section
-     [:h1 "Isotretinoin Counseling" ]
-     [:div.text
-      "Patient should be on two forms of birth control, get monthly blood tests, not donate blood, not drive at night
+      [:section
+       [:h1 "Isotretinoin Counseling" ]
+       [:div.text
+        "Patient should be on two forms of birth control, get monthly blood tests, not donate blood, not drive at night
 it vision affected, not share medication, and not undergo surgery for 6 months after tx completed. Side effects reviewed, pt to
 contact office should one occur."]]
-    [:section
-     [:h1 "Doxycycline Counseling" ]
-     [:div.text
-      "Patient counseled regarding possible photosensitivity and increased risk for sunburn. Patient instructed
+      [:section
+       [:h1 "Doxycycline Counseling" ]
+       [:div.text
+        "Patient counseled regarding possible photosensitivity and increased risk for sunburn. Patient instructed
 to avoid sunlight, if possible. When exposed to sunlight, patients should wear protective clothing, sunglasses, and sunscreen. The
 patient was instructed to call the office immediately if the following severe adverse effects occur: hearing changes, easy
 bruising/bleeding, severe headache, or vision changes. The patient verbalized understanding of the proper use and possible
 adverse effects of doxycycline. All of the patient's questions and concerns were addressed. Patient understands to avoid
 pregnancy while on therapy due to potential birth defects.
 "]]
-    [:section
-     [:h1 "Location" ]
-     [:img {:src "https://www.acne.org/img/body-acne-illustration.jpg"}]
-     [:img {:src "https://www.acne.org/img/body-acne-illustration.jpg"}]]
+      [:section
+       [:h1 "Location" ]
+       [:img {:src "https://www.acne.org/img/body-acne-illustration.jpg"}]
+       [:img {:src "https://www.acne.org/img/body-acne-illustration.jpg"}]]
 
-    [:section
-     [:h1 "Photos" ]
-     [:img {:style {:width "200px" :margin-right "20px"} :src "http://www.cmcnsw.com.au/wp-content/uploads/2013/06/Acne-1.jpg"}]
-     [:img {:style {:width "200px" :margin-right "20px"} :src "http://www.cmcnsw.com.au/wp-content/uploads/2013/06/Acne-1.jpg"}]
-     [:img {:style {:width "200px"} :src "http://www.cmcnsw.com.au/wp-content/uploads/2013/06/Acne-1.jpg"}]]
+      [:section
+       [:h1 "Photos" ]
+       [:img {:style {:width "200px" :margin-right "20px"} :src "http://www.cmcnsw.com.au/wp-content/uploads/2013/06/Acne-1.jpg"}]
+       [:img {:style {:width "200px" :margin-right "20px"} :src "http://www.cmcnsw.com.au/wp-content/uploads/2013/06/Acne-1.jpg"}]
+       [:img {:style {:width "200px"} :src "http://www.cmcnsw.com.au/wp-content/uploads/2013/06/Acne-1.jpg"}]]
 
-    [:hr]
-    [:section
-     [:h1 "Post Inflammatory Pigmentary Change (L81.0)" ]
-     [:div.text
-      "I counseled the patient regarding the following:
+      [:hr]
+      [:section
+       [:h1 "Post Inflammatory Pigmentary Change (L81.0)" ]
+       [:div.text
+        "I counseled the patient regarding the following:
 Skin care: Recommend minimizing sun exposure, wearing sunscreen and protective clothing.
 Expectations: Post Inflammatory pigmentary change is lighter or darker discoloration than surrounding skin resulting from trauma or
 rashes. Areas tend to normalize over time, but can take months to years.
@@ -395,13 +390,13 @@ Contact office if: PIH worsens, or spread to other parts of the body.
 Will take time to resolve, observation recommended. Photo protection recommended.
 Treat underlying causative condition."]]
 
-    [:hr]
-    [:section
-     [:h1 "Follow Up in 1 month with Dr. Sun" ]
-     [:img {:src "http://www.titanui.com/wp-content/uploads/2013/05/29/Pink-and-White-Flat-Calendar-Widget-PSD.jpg"}]]
+      [:hr]
+      [:section
+       [:h1 "Follow Up in 1 month with Dr. Sun" ]
+       [:img {:src "http://www.titanui.com/wp-content/uploads/2013/05/29/Pink-and-White-Flat-Calendar-Widget-PSD.jpg"}]]
 
 
-    ]])
+      ]]))
 
 (defn tasks [params]
   [:div.center
@@ -437,14 +432,14 @@ Treat underlying causative condition."]]
     [:br]
     [:br]
 
-    [:a.item 
+    [:a.item
      [wgt/rand-icon]
      [:a.title {:href (href :tasks :claim-submit)} "Submit claims for 08/23/17"]
      [:br]
      [:b "Assigned: "] (user "Nikolai Lee")
-     [:b "Status: "] "in-progress" 
+     [:b "Status: "] "in-progress"
      ]
-    [:a.item 
+    [:a.item
      [wgt/rand-icon]
      [:a.title {:href (href :tasks :claim-report)}
       "Billing report for July"]
@@ -452,7 +447,7 @@ Treat underlying causative condition."]]
       " ›"]
      [:br]
      [:b "Assigned: "] (user "Will Smith")
-     [:b "Status: "] "in-progress" 
+     [:b "Status: "] "in-progress"
      ]
 
     [:a.item.critical
@@ -463,25 +458,25 @@ Treat underlying causative condition."]]
      [:b "Assigned: "] (user "John Ivanov")
      [:b "Status: "] "in-progress"]
 
-    [:a.item 
+    [:a.item
      [wgt/rand-icon]
      [:a.title {:href (href :tasks :claim-report)}
       "Billing report for July"]
      [:br]
 
      [:b "Assigned: "] (user "Will Smith")
-     [:b "Status: "] "in-progress" 
+     [:b "Status: "] "in-progress"
      ]
-    [:a.item 
+    [:a.item
      [wgt/rand-icon]
      [:a.title {:href (href :tasks :claim-era)}
       "Check ERA for John Johanson for 08/01/17"]
      [:br]
      [:b "Assigned: "] (user "Andrew Dunston")
-     [:b "Status: "] "in-progress" 
+     [:b "Status: "] "in-progress"
      ]
     ]
-   
+
    [:br]
    [:div.history
    [:h3 "History"]
@@ -502,7 +497,7 @@ Treat underlying causative condition."]]
           [:br]
           [:a {:href "#" :style {:color "#03A9F4"}} "Read more..."]]]
 
-        [:a.item 
+        [:a.item
          [:span.time "10:15"]
          [wgt/rand-icon]
          [:a.title {:href (href :tasks :claim-report)}
@@ -523,7 +518,7 @@ Treat underlying causative condition."]]
               :padding "5px 10px"
               :margin-left "10px"
               :border-bottom "1px solid #aaa"}]])
-   [:h1 "Claim form"] 
+   [:h1 "Claim form"]
    [:h3 "Patient Info"]
    [:div.form-row
     [:label "Patient Name"]
@@ -592,12 +587,12 @@ Treat underlying causative condition."]]
    (styles/style
     [:div.task-pane {}
      [:div.task-bar {:position "absolute"
-                     :left "90px" 
+                     :left "90px"
                      :width "400px"
                      :padding "20px"
                      :bottom 0
                      :border-left "1px solid #ddd"
-                     :top 0 
+                     :top 0
                      :background-color "#f6f6f6"}]
      [:.task {}
       [:b {:font-weight 300 :color "#888"}]]
@@ -746,7 +741,7 @@ Treat underlying causative condition."]]
      [:b {:color "gray" :font-weight "300"}]
      [:img.avatar {:width "20px" :border "1px solid #ddd" :border-radius "50%"}]])
 
-   [:h3 "Patient: " (avatar) " Ivan Mccalohen " [:span.small [wgt/icon :male] " 37 years old"]] 
+   [:h3 "Patient: " (avatar) " Ivan Mccalohen " [:span.small [wgt/icon :male] " 37 years old"]]
    [:padding-left
     [:b "Phone: "] " 7777-77667"
     [:br]
@@ -764,7 +759,7 @@ Treat underlying causative condition."]]
                    :border "1px solid #ddd"
                    :display "inline-block"
                    :border-radius "50%"}]])
-   [:h3 "Visit: Cryotherapy" [:span.small " 08/01/2017"]] 
+   [:h3 "Visit: Cryotherapy" [:span.small " 08/01/2017"]]
    [:p
     [:b "Physician: "] (user "Dr. House")]])
 
@@ -808,7 +803,7 @@ Treat underlying causative condition."]]
 
 (defn task [params]
   [:div
-   (get 
+   (get
     {"claim-submit" [claim-submit params]
      "check-claim" [claim-check params]
      "claim-era" [claim-era params]
@@ -963,7 +958,7 @@ Treat underlying causative condition."]]
           [:.fa {:color "gray"  :margin-right "10px"}]
           [:.action [:.fa {:color "gray"  :margin-right "0px"}]]
           [:.title {:margin "0px"}]]
-         
+
          [:.item {:padding "5px 0"
                   ;; :border-left "2px solid #8bc34a"
                   :border-left "2px solid #ddd"
@@ -982,7 +977,7 @@ Treat underlying causative condition."]]
          [:.option {:font-weight 300 :color "#888" :margin-right "15px"}]
          ])
        [patient-bgt opened]
-       
+
 
        [:br]
        [:h3 "Timeline "
@@ -1070,7 +1065,7 @@ Treat underlying causative condition."]]
          [wgt/rand-icon]
          "Paitient arrived"]
         ]
-       
+
        ])))
 
 (defn profile [params]
@@ -1092,7 +1087,7 @@ Treat underlying causative condition."]]
                 :width "20em"
                 :border-bottom "1px solid #888"
                 :border-left "none"}
-      
+
       [:&:focus
        {:border-top "none"
         :border-right "none"
@@ -1160,7 +1155,7 @@ Treat underlying causative condition."]]
        [:td [:a.action "Chat"] [:a.action "Task"] [:a.action "Call"]]
        ]
 
-      ]]] 
+      ]]]
    ])
 
 (pages/reg-page :dashboard/index index)

@@ -53,7 +53,8 @@
         (let [editor
               (.fromTextArea
                js/CodeMirror (r/dom-node this)
-               (clj->js {:lineNumbers true
+               (clj->js {:viewportMargin (.-Infinity js/window)
+                         :lineWrapping true
                          :hintOptions {:hint complete-fn}}))]
           (.on editor "change" (fn [cm _] (on-change (.getValue cm))))
           (.on editor "keyup"
