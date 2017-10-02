@@ -10,6 +10,7 @@
    [frames.window-location :as location]
    [ui.pages :as pages]
    [ui.dashboard.core]
+   [ui.anatomy.core]
    [ui.utils]
    [ui.routes :as routes]
    [ui.layout :as layout]))

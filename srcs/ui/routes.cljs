@@ -8,7 +8,9 @@
              "notes" {:. :dashboard/notes}
              "profile" {:. :dashboard/profile}
              "patients" {:. :dashboard/patients}
-             "navigation" {:. :dashboard/navigation}})
+             "navigation" {:. :dashboard/navigation}
+             "anatomy" {:. :anatomy/index}
+             })
 
 (defn href
   [& parts]
